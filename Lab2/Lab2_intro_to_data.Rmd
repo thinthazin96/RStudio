@@ -122,6 +122,7 @@ ggplot(data = nycflights, aes(x = dep_delay)) +
 
 **Insert your answer here**
 
+
 If you want to visualize only on delays of flights headed to Los Angeles, you need to first `filter` the data for flights with that destination (`dest == "LAX"`) and then make a histogram of the departure delays of only those flights.
 
 ```{r lax-flights-hist}
@@ -186,12 +187,26 @@ Note that you can separate the conditions using commas if you want flights that 
     meet these criteria? 
 
 **Insert your answer here**
+```{r}
+sfo_feb_flights <- nycflights %>%
+  filter(dest == "SFO", month == 2)
+```
+68 flights meet these criteria. Does the duplicate flight count???
 
 3.  Describe the distribution of the **arrival** delays of these flights using a 
     histogram and appropriate summary statistics. **Hint:** The summary 
     statistics you use should depend on the shape of the distribution.
     
 **Insert your answer here**
+```{r}
+ggplot(data = sfo_feb_flights, aes(x = arr_delay)) + geom_histogram(binwidth = 15)
+
+sfo_feb_flights %>%
+  summarise(mean_sfo = mean(arr_delay),
+            median_sfo = median(arr_delay),
+            n = n())
+```
+
 
 Another useful technique is quickly calculating summary statistics for various groups in your data frame. For example, we can modify the above command using the `group_by` function to get the same summary stats for each origin airport:
 
