@@ -121,7 +121,7 @@ ggplot(data = nycflights, aes(x = dep_delay)) +
 1.  Look carefully at these three histograms. How do they compare? Are features revealed in one that are obscured in another?
 
 **Insert your answer here**
-
+Based on the analysis of all three histograms, the histogram with no bin width and the one with a bin width of 15 provide a better representation of the data distribution. In the histogram with a bin width of 15, both delayed and early departures are clearly visible, unlike in the histograms with no specified bin width and with a bin width of 150. Although the histogram with a bin width of 150 shows flight delay counts exceeding 30,000, the distribution is difficult to interpret due to the wide bins.
 
 If you want to visualize only on delays of flights headed to Los Angeles, you need to first `filter` the data for flights with that destination (`dest == "LAX"`) and then make a histogram of the departure delays of only those flights.
 
