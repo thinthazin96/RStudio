@@ -471,6 +471,15 @@ can use the \texttt{\textbar{}} instead of the comma.
 
 \textbf{Insert your answer here}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sfo\_feb\_flights }\OtherTok{\textless{}{-}}\NormalTok{ nycflights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(dest }\SpecialCharTok{==} \StringTok{"SFO"}\NormalTok{, month }\SpecialCharTok{==} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+68 flights meet these criteria. Does the duplicate flight count???
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{2}
@@ -483,6 +492,30 @@ can use the \texttt{\textbar{}} instead of the comma.
 \end{enumerate}
 
 \textbf{Insert your answer here}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ sfo\_feb\_flights, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ arr\_delay)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Lab2_intro_to_data_files/figure-latex/unnamed-chunk-2-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sfo\_feb\_flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_sfo =} \FunctionTok{mean}\NormalTok{(arr\_delay),}
+            \AttributeTok{median\_sfo =} \FunctionTok{median}\NormalTok{(arr\_delay),}
+            \AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   mean_sfo median_sfo     n
+##      <dbl>      <dbl> <int>
+## 1     -4.5        -11    68
+\end{verbatim}
 
 Another useful technique is quickly calculating summary statistics for
 various groups in your data frame. For example, we can modify the above
