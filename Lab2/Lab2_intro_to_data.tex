@@ -560,6 +560,29 @@ the summary statistics.
 
 \textbf{Insert your answer here}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sfo\_feb\_flights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(carrier) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{median\_dd =} \FunctionTok{median}\NormalTok{(arr\_delay), }
+            \AttributeTok{iqr\_dd =} \FunctionTok{IQR}\NormalTok{(arr\_delay), }
+            \AttributeTok{n\_flights =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 4
+##   carrier median_dd iqr_dd n_flights
+##   <chr>       <dbl>  <dbl>     <int>
+## 1 AA            5     17.5        10
+## 2 B6          -10.5   12.2         6
+## 3 DL          -15     22          19
+## 4 UA          -10     22          21
+## 5 VX          -22.5   21.2        12
+\end{verbatim}
+
+American Airline AA carrier has the most variable arrival delays.
+
 \subsubsection{Departure delays by
 month}\label{departure-delays-by-month}
 

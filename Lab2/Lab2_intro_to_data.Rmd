@@ -223,6 +223,14 @@ Here, we first grouped the data by `origin` and then calculated the summary stat
     has the most variable arrival delays?
 
 **Insert your answer here**
+```{r}
+sfo_feb_flights %>%
+  group_by(carrier) %>%
+  summarise(median_dd = median(arr_delay), 
+            iqr_dd = IQR(arr_delay), 
+            n_flights = n())
+```
+American Airline AA carrier has the most variable arrival delays.
 
 ### Departure delays by month
 
@@ -249,6 +257,10 @@ nycflights %>%
     What are the pros and cons of these two choices?
 
 **Insert your answer here**
+```{r}
+
+```
+
 
 ### On time departure rate for NYC airports
 
