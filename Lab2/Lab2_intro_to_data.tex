@@ -651,6 +651,74 @@ Let's think about how you could answer this question:
 
 \textbf{Insert your answer here}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ nycflights, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dep\_delay)) }\SpecialCharTok{+}
+\FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{50}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Lab2_intro_to_data_files/figure-latex/lowest-mean-departure-delay-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nycflights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(month) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean\_dd =} \FunctionTok{min}\NormalTok{(}\FunctionTok{mean}\NormalTok{(dep\_delay)), }\AttributeTok{n\_flights =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{((mean\_dd))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 12 x 3
+##    month mean_dd n_flights
+##    <int>   <dbl>     <int>
+##  1    10    5.88      2884
+##  2    11    6.10      2733
+##  3     9    6.87      2681
+##  4     1   10.2       2610
+##  5     2   10.7       2286
+##  6     8   12.6       2880
+##  7     5   13.3       2821
+##  8     3   13.5       2869
+##  9     4   14.6       2781
+## 10    12   17.4       2716
+## 11     6   20.4       2732
+## 12     7   20.8       2742
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nycflights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(month) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{median\_dd =} \FunctionTok{min}\NormalTok{(}\FunctionTok{median}\NormalTok{(dep\_delay)),}\AttributeTok{n\_flights =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{((median\_dd))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 12 x 3
+##    month median_dd n_flights
+##    <int>     <dbl>     <int>
+##  1     9        -3      2681
+##  2    10        -3      2884
+##  3     1        -2      2610
+##  4     2        -2      2286
+##  5     4        -2      2781
+##  6    11        -2      2733
+##  7     3        -1      2869
+##  8     5        -1      2821
+##  9     8        -1      2880
+## 10     6         0      2732
+## 11     7         0      2742
+## 12    12         1      2716
+\end{verbatim}
+
+October is a month that minimizes your potential departure delay leaving
+NYC using lowest mean departure delay but using lowest median departure
+delay, September is a month that minimizes your potential departure
+delay leaving NYC.The graph is positive skewed distribution.
+
 \subsubsection{On time departure rate for NYC
 airports}\label{on-time-departure-rate-for-nyc-airports}
 

@@ -257,10 +257,21 @@ nycflights %>%
     What are the pros and cons of these two choices?
 
 **Insert your answer here**
-```{r}
+```{r lowest-mean-departure-delay}
+ggplot(data = nycflights, aes(x = dep_delay)) +
+geom_histogram(binwidth = 50)
 
+nycflights %>%
+  group_by(month) %>%
+  summarise(mean_dd = min(mean(dep_delay)), n_flights = n()) %>%
+  arrange((mean_dd))
+
+nycflights %>%
+  group_by(month) %>%
+  summarise(median_dd = min(median(dep_delay)),n_flights = n()) %>%
+  arrange((median_dd))
 ```
-
+October is a month that minimizes your potential departure delay leaving NYC using lowest mean departure delay but using lowest median departure delay, September is a month that minimizes your potential departure delay leaving NYC.The graph is positive skewed distribution.
 
 ### On time departure rate for NYC airports
 
