@@ -271,7 +271,10 @@ nycflights %>%
   summarise(median_dd = min(median(dep_delay)),n_flights = n()) %>%
   arrange((median_dd))
 ```
-October is a month that minimizes your potential departure delay leaving NYC using lowest mean departure delay but using lowest median departure delay, September is a month that minimizes your potential departure delay leaving NYC.The graph is positive skewed distribution.
+Using the lowest mean departure delay, October is the month that minimizes your potential departure delay when leaving NYC. Using the lowest median departure delay, both September and October minimize your potential delay. Pro of lowest mean delay, minimized the average delay overall and takes into account all flights, including extreme  delays.It is good for the overall system performace. But the downside is, a few very large delays can effect the mean. SO it doesn't represent a typical flight experiences.
+On the other hand, the pro of the lowest median delay pick the middle one by lining up all the waiting times. So it's represent a typical flight experiences. The downside is, it ignores how severe extreme delays are. Therefore, a month could have a low median but sitll have accasional massive delays.
+
+Since the distribution is positively skewed, the median better reflects a typical flight experience. Overall, October is the best month to minimize your potential departure delay from NYC.
 
 ### On time departure rate for NYC airports
 
@@ -314,6 +317,13 @@ ggplot(data = nycflights, aes(x = origin, fill = dep_type)) +
 ```
 
 **Insert your answer here**
+```{r}
+nycflights %>%
+  group_by(origin) %>%
+  summarise(ot_dep_rate = (sum(dep_type == "on time") / n())) %>%
+  summarise(Airport = min(origin), most_onTime_percentage=min(ot_dep_rate))
+```
+I would choose EWR airport base on the highest on time departure percentage. 
 
 * * *
 
@@ -325,12 +335,25 @@ ggplot(data = nycflights, aes(x = origin, fill = dep_type)) +
     number of hours of travel, and note that `air_time` is given in minutes.
     
 **Insert your answer here**
+```{r}
+nycflights <- nycflights %>%
+  mutate(avg_speed = distance / (air_time / 60))
+  
+```
+
 
 8.  Make a scatterplot of `avg_speed` vs. `distance`. Describe the relationship
     between average speed and distance.
     **Hint:** Use `geom_point()`.
 
 **Insert your answer here**
+```{r}
+ggplot(data = nycflights, aes(x = avg_speed, y = distance)) +
+  geom_point()
+
+
+```
+
 
 9.  Replicate the following plot. **Hint:** The data frame plotted only
     contains flights from American Airlines, Delta Airlines, and United
