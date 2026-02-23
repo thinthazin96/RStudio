@@ -366,3 +366,12 @@ knitr::include_graphics('Question9Plot.png')
 ```
 
 **Insert your answer here**
+```{r}
+nycflights <- nycflights %>%
+  filter(carrier == "AA" | carrier == "DL" | carrier == "UA") 
+  
+ggplot(data = nycflights, aes(x = dep_delay, y = arr_delay, color=carrier)) + geom_point()
+
+```
+
+
