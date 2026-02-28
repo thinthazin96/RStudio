@@ -1,6 +1,6 @@
 ---
 title: "Probability"
-author: ""
+author: "Thin Thazin"
 output:
   pdf_document: default
   html_document:
@@ -64,6 +64,8 @@ Within the nine shot attempts, there are six streaks, which are separated by a "
     streak of 1? What about a streak length of 0?
 
 **Insert your answer here**
+A streak length of 1 means there is 1 hit and then a miss. Therefore, the streak length is 1. A streak length of 0 means the shoot is a miss and the one before this is also a miss. That is why the streak length is 0.
+
 
 Counting streak lengths manually for all 133 shots would get tedious, so we'll use the custom function `calc_streak` to calculate them, and store the results in a data frame called `kobe_streak` as the `length` variable.
 
