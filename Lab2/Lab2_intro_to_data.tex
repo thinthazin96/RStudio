@@ -714,10 +714,22 @@ Let's think about how you could answer this question:
 ## 12    12         1      2716
 \end{verbatim}
 
-October is a month that minimizes your potential departure delay leaving
-NYC using lowest mean departure delay but using lowest median departure
-delay, September is a month that minimizes your potential departure
-delay leaving NYC.The graph is positive skewed distribution.
+Using the lowest mean departure delay, October is the month that
+minimizes your potential departure delay when leaving NYC. Using the
+lowest median departure delay, both September and October minimize your
+potential delay. Pro of lowest mean delay, minimized the average delay
+overall and takes into account all flights, including extreme delays.It
+is good for the overall system performace. But the downside is, a few
+very large delays can effect the mean. SO it doesn't represent a typical
+flight experiences. On the other hand, the pro of the lowest median
+delay pick the middle one by lining up all the waiting times. So it's
+represent a typical flight experiences. The downside is, it ignores how
+severe extreme delays are. Therefore, a month could have a low median
+but sitll have accasional massive delays.
+
+Since the distribution is positively skewed, the median better reflects
+a typical flight experience. Overall, October is the best month to
+minimize your potential departure delay from NYC.
 
 \subsubsection{On time departure rate for NYC
 airports}\label{on-time-departure-rate-for-nyc-airports}
@@ -807,6 +819,25 @@ across the three airports using a segmented bar plot.
 
 \textbf{Insert your answer here}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nycflights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(origin) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{ot\_dep\_rate =}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(dep\_type }\SpecialCharTok{==} \StringTok{"on time"}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{n}\NormalTok{())) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Airport =} \FunctionTok{min}\NormalTok{(origin), }\AttributeTok{most\_onTime\_percentage=}\FunctionTok{min}\NormalTok{(ot\_dep\_rate))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   Airport most_onTime_percentage
+##   <chr>                    <dbl>
+## 1 EWR                      0.637
+\end{verbatim}
+
+I would choose EWR airport base on the highest on time departure
+percentage.
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsection{More Practice}\label{more-practice}
@@ -825,6 +856,13 @@ across the three airports using a segmented bar plot.
 
 \textbf{Insert your answer here}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nycflights }\OtherTok{\textless{}{-}}\NormalTok{ nycflights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{avg\_speed =}\NormalTok{ distance }\SpecialCharTok{/}\NormalTok{ (air\_time }\SpecialCharTok{/} \DecValTok{60}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{7}
@@ -836,6 +874,15 @@ across the three airports using a segmented bar plot.
 \end{enumerate}
 
 \textbf{Insert your answer here}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ nycflights, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ avg\_speed, }\AttributeTok{y =}\NormalTok{ distance)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Lab2_intro_to_data_files/figure-latex/unnamed-chunk-6-1.pdf}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -853,5 +900,16 @@ across the three airports using a segmented bar plot.
 \pandocbounded{\includegraphics[keepaspectratio]{Question9Plot.png}}
 
 \textbf{Insert your answer here}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nycflights }\OtherTok{\textless{}{-}}\NormalTok{ nycflights }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(carrier }\SpecialCharTok{==} \StringTok{"AA"} \SpecialCharTok{|}\NormalTok{ carrier }\SpecialCharTok{==} \StringTok{"DL"} \SpecialCharTok{|}\NormalTok{ carrier }\SpecialCharTok{==} \StringTok{"UA"}\NormalTok{) }
+  
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ nycflights, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dep\_delay, }\AttributeTok{y =}\NormalTok{ arr\_delay, }\AttributeTok{color=}\NormalTok{carrier)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Lab2_intro_to_data_files/figure-latex/unnamed-chunk-7-1.pdf}}
 
 \end{document}
