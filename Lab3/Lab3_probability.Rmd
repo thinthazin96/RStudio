@@ -85,6 +85,15 @@ ggplot(data = kobe_streak, aes(x = length)) +
     baskets? Make sure to include the accompanying plot in your answer.
 
 **Insert your answer here**
+```{r}
+kobe_streak %>%
+  summarise(longest_streak = max(length))
+
+kobe_streak %>%
+  count(length)
+
+```
+Most streaks have length 0, followed by 1, while longer streaks occur less frequently. The typical streak length is 0, and the longest streak is 4 baskets.
 
 ## Compared to What?
 
@@ -145,6 +154,11 @@ sim_unfair_coin <- sample(coin_outcomes, size = 100, replace = TRUE,
 
 `prob=c(0.2, 0.8)` indicates that for the two elements in the `outcomes` vector, we want to select the first one, `heads`, with probability 0.2 and the second one, `tails` with probability 0.8. Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled "head" and 8 chips "tail". Therefore at each draw, the probability of drawing a chip that says "head"" is 20%, and "tail" is 80%.
 
+```{r}
+set.seed(18495)
+```
+
+
 3.  In your simulation of flipping the unfair coin 100 times, how many flips 
     came up heads? Include the code for sampling the unfair coin in your response.
     Since the markdown file will run the code, and generate a new sample each time
@@ -152,12 +166,17 @@ sim_unfair_coin <- sample(coin_outcomes, size = 100, replace = TRUE,
     about setting a seed below.
 
 **Insert your answer here**
+```{r}
+sim_unfair_coin
+table(sim_unfair_coin)
+```
+The heads came up 19 times.
 
 <div id="boxedtext">
 **A note on setting a seed:** Setting a seed will cause R to select the same sample each time you knit your document. This will make sure your results don't change each time you knit, and it will also ensure reproducibility of your work (by setting the same seed it will be possible to reproduce your results). You can set a seed like this:
 
 ```{r set-seed}
-set.seed(35797)                 # make sure to change the seed
+#set.seed(35797)                 # make sure to change the seed
 ```
 
 The number above is completely arbitraty. If you need inspiration, you can use your ID, birthday, or just a random string of numbers. The important thing is that you use each seed only once in a document. Remember to do this **before** you sample in the exercise above.
@@ -188,6 +207,11 @@ To make a valid comparison between Kobe and your simulated independent shooter, 
     `sim_basket`.
 
 **Insert your answer here**
+```{r}
+sim_basket <- sample(shot_outcomes, size = 133, replace = TRUE,
+                     prob = c(0.45,0.55))
+```
+
 
 Note that we've named the new vector `sim_basket`, the same name that we gave to the previous vector reflecting a shooting percentage of 50%. In this situation, R overwrites the old object with the new one, so always make sure that you don't need the information in an old vector before reassigning its name.
 
@@ -205,6 +229,11 @@ Both data sets represent the results of 133 shot attempts, each with the same sh
     save the results in a data frame called `sim_streak`.
 
 **Insert your answer here**
+```{r}
+sim_streak <- calc_streak(sim_basket)
+
+```
+
 
 6.  Describe the distribution of streak lengths. What is the typical streak 
     length for this simulated independent shooter with a 45% shooting percentage?
@@ -212,6 +241,18 @@ Both data sets represent the results of 133 shot attempts, each with the same sh
     to include a plot in your answer.
 
 **Insert your answer here**
+```{r}
+ggplot(data = sim_streak,aes(x = length)) +
+  geom_bar()
+
+sim_streak %>%
+  summarise(longest_simstreak = max(length))
+
+sim_streak %>%
+  count(length)
+
+```
+The typical streak length is 0 because it frequently occurs and the longest is the player is 4.
 
 7.  If you were to run the simulation of the independent shooter a second time, 
     how would you expect its streak distribution to compare to the distribution 
@@ -219,6 +260,7 @@ Both data sets represent the results of 133 shot attempts, each with the same sh
     different? Explain your reasoning.
 
 **Insert your answer here**
+It's exactly the same.
 
 8.  How does Kobe Bryant's distribution of streak lengths compare to the 
     distribution of streak lengths for the simulated shooter? Using this 
@@ -226,5 +268,5 @@ Both data sets represent the results of 133 shot attempts, each with the same sh
     shooting patterns? Explain.
 
 **Insert your answer here**
-
+Both distribution has longer steaks on 0 and 1. Kobe's streak distribution is very similar to the simulated independent shooter, therefore, the hot hand model doesn't fit on Kobe's shooting patterns. If the hot hand were present, more long streaks of Hits than the independent shooter simulation.  
 * * *
