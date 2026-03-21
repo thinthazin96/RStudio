@@ -1,6 +1,6 @@
 ---
 title: "Foundations for statistical inference - Sampling distributions"
-author: ""
+author: "Thin Thazin"
 output:
   pdf_document: default
   html_document:
@@ -110,8 +110,8 @@ ggplot(samp1, aes(x = scientist_work)) +
   ) +
   coord_flip() 
 ```
-```
 
+The sample distribution will be similar but not identical to the population. In the population, 80% say "Benefits" and 20% say "Doesn't benefit." In the sample of 50, the proportions vary slightly 74% vs 26% and the difference is due to random sampling variability. Overall, the sample still roughly reflects the population but is not exact.
 
 If you're interested in estimating the proportion of all people who do not believe that the work scientists do benefits them, but you do not have access to the population data, your best single guess is the sample mean.
 
@@ -136,6 +136,7 @@ Depending on which 50 people you selected, your estimate could be a bit above or
 2.  Would you expect the sample proportion to match the sample proportion of another student's sample? Why, or why not? If the answer is no, would you expect the proportions to be somewhat different or very different? Ask a student team to confirm your answer.
 
 **Insert your answer here**
+No, the sample proportions will not match exactly because each student takes a different random sample. However, they should be somewhat similar since all samples come from the same population.
 
 3.  Take a second sample, also of size 50, and call it `samp2`. How does the sample proportion of `samp2` compare with that of `samp1`? Suppose we took two more samples, one of size 100 and one of size 1000. Which would you think would provide a more accurate estimate of the population proportion?
 
