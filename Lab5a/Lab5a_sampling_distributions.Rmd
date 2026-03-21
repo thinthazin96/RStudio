@@ -141,6 +141,33 @@ No, the sample proportions will not match exactly because each student takes a d
 3.  Take a second sample, also of size 50, and call it `samp2`. How does the sample proportion of `samp2` compare with that of `samp1`? Suppose we took two more samples, one of size 100 and one of size 1000. Which would you think would provide a more accurate estimate of the population proportion?
 
 **Insert your answer here**
+```{r}
+samp2 <- global_monitor %>%
+  sample_n(50)
+
+samp2 %>%
+  count(scientist_work) %>%
+  mutate(p_hat = n / sum(n))
+```
+
+```{r}
+samp3 <- global_monitor %>%
+  sample_n(100)
+
+samp3 %>%
+  count(scientist_work) %>%
+  mutate(p_hat = n / sum(n))
+```
+
+```{r}
+samp4 <- global_monitor %>%
+  sample_n(1000)
+
+samp4 %>%
+  count(scientist_work) %>%
+  mutate(p_hat = n / sum(n))
+```
+The sample proportions from samp1 and samp2 are different but close. As we can see, the larger the sample size, the better the accuracy. 
 
 Not surprisingly, every time you take another random sample, you might get a different sample proportion. It's useful to get a sense of just how much variability you should expect when estimating the population mean this way. The distribution of sample proportions, called the *sampling distribution (of the proportion)*, can help you understand this variability. In this lab, because you have access to the population, you can build up the sampling distribution for the sample proportion by repeating the above steps many times. Here, we use R to take 15,000 different samples of size 50 from the population, calculate the proportion of responses in each sample, filter for only the *Doesn't benefit* responses, and store each result in a vector called `sample_props50`. Note that we specify that `replace = TRUE` since sampling distributions are constructed by sampling with replacement.
 
@@ -170,6 +197,7 @@ Next, you will review how this set of code works.
 4.  How many elements are there in `sample_props50`?  Describe the sampling distribution, and be sure to specifically note its center. Make sure to include a plot of the distribution in your answer.
 
 **Insert your answer here**
+There are 15,000 observations which is one for each sample and each of them represents a sample proportion p_hat. This sampling distribution has normal(bell-shaped) distribution, the center is around 0.20, and the spread moderate variablity due to sample size of 50.
 
 ## Interlude: Sampling distributions
 
